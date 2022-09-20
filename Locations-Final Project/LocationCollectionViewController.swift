@@ -30,6 +30,25 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
         locations = DatabaseHelper.shared.getLocationsFromCoreData()
     }
     
+    @IBAction func deleteLocation(_ sender: UIButton) {
+
+        var superview = sender.superview
+        while let view = superview, !(view is UICollectionViewCell) {
+            superview = view.superview
+        }
+        guard let cell = superview as? UICollectionViewCell else {
+            print("button is not contained in a table view cell")
+            return
+        }
+        guard let indexPath = collectionView.indexPath(for: cell) else {
+            print("failed to get index path for cell containing button")
+            return
+        }
+        // We've got the index path for the cell that contains the button, now do something with it.
+        
+            DatabaseHelper.shared.deleteLocationData(index: indexPath.row)
+    }
+    
     @IBAction func openLocationForm(_ sender: Any) {
         locationFormViewController = storyboard?.instantiateViewController(withIdentifier: "LocationFormViewController") as? LocationFormViewController
         
@@ -68,7 +87,6 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
         navigateToMapView(indexPath.item)
     }
     
