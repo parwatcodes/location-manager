@@ -12,6 +12,7 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    
     var locationCollectionViewCtrl: LocationCollectionViewController!
     var locationIndex: Int?
     var location = Location();
@@ -28,13 +29,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func loadLocationData(){
         location = DatabaseHelper.shared.getLocationFromCoreData(index: locationIndex!)
-    }
-    
-    @IBAction func Cancel(_ sender: UIButton) {
-        locationCollectionViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationCollectionViewController") as? LocationCollectionViewController
-        
-        locationCollectionViewCtrl.modalPresentationStyle = .fullScreen
-        self.present(locationCollectionViewCtrl, animated: true, completion: nil)
     }
     
     func addLocationPin() {
@@ -72,5 +66,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         return p
+    }
+    
+    @IBAction func Cancel(_ sender: UIButton) {
+        locationCollectionViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationCollectionViewController") as? LocationCollectionViewController
+        
+        locationCollectionViewCtrl.modalPresentationStyle = .fullScreen
+        self.present(locationCollectionViewCtrl, animated: true, completion: nil)
     }
 }
