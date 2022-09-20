@@ -19,6 +19,7 @@ class LocationFormViewController: UIViewController {
     let imagePicker = UIImagePickerController()
     let dateFormatter = DateFormatter()
     var date: String = ""
+    var locationCollectionViewCtrl: LocationCollectionViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +46,6 @@ class LocationFormViewController: UIViewController {
     @IBAction func btnSaveClicked(_ sender: UIButton) {
         //let jpeg = imgView.image?.jpegData(compressionQuality: 0.75)
         
-        print("all data", name.text!, latitude.text!, longitude.text!, date, info.text!)
-        
         let valitionErr = validateLocationInput();
         
         if (!valitionErr.isEmpty) {
@@ -62,8 +61,25 @@ class LocationFormViewController: UIViewController {
                 let info = info.text!
                 
                 DatabaseHelper.shared.saveLocationToCoreData(imgData: png, name, lat, long, info, date)
+
+                
+                let alertController = getAlertController("Location added.")
+                present(alertController, animated: true, completion: nil)
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    alertController.dismiss(animated: true)
+                    
+                    self.backToCollection()
+                }
             }
         }
+    }
+    
+    func backToCollection() {
+        locationCollectionViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationCollectionViewController") as? LocationCollectionViewController
+        
+        locationCollectionViewCtrl.modalPresentationStyle = .fullScreen
+        self.present(locationCollectionViewCtrl, animated: true, completion: nil)
     }
     
     @IBAction func selectPhotos(_ sender: Any) {
@@ -95,8 +111,12 @@ class LocationFormViewController: UIViewController {
             return "Please enter info."
         }
         
-        if (Double(latitude.text!) == nil || Double(longitude.text!) == nil) {
+        if (latitude.text!.isEmpty || longitude.text!.isEmpty) {
             return "Invalid input entered in latitude or longitude";
+        }
+        
+        if ((imgView.image?.pngData()) == nil) {
+            return "Please select a photo."
         }
         
         return "";

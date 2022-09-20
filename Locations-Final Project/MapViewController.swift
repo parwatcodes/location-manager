@@ -33,6 +33,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func addLocationPin() {
         let annotation = MKPointAnnotation()
+
         let lat = CLLocationDegrees(Double(location.latitude!)!)
         let long = CLLocationDegrees(Double(location.longitude!)!)
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -42,7 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let date = location.date
         
         annotation.coordinate = coordinate
-        annotation.title = "\(name ?? "")"
+        annotation.title = "\(name ?? "") (\(date ?? ""))"
         annotation.subtitle = info
         
         self.mapView.addAnnotation(annotation);

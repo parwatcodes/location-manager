@@ -70,6 +70,8 @@ class DatabaseHelper{
             if (location.name != nil) {
                 context.delete(location)
                 try context.save()
+                
+                
             } else {
                 print("Failed to delete")
             }

@@ -12,6 +12,7 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
     var locations = [Location]();
     var locationFormViewController: LocationFormViewController!
     var mapViewController: MapViewController!
+    var locationCollectionViewCtrl: LocationCollectionViewController!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -47,6 +48,22 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
         // We've got the index path for the cell that contains the button, now do something with it.
         
             DatabaseHelper.shared.deleteLocationData(index: indexPath.row)
+        
+        let alertController = getAlertController("Location Deleted...")
+        present(alertController, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            alertController.dismiss(animated: true)
+            
+            self.reloadCollectionView()
+        }
+    }
+    
+    func reloadCollectionView() {
+        locationCollectionViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationCollectionViewController") as? LocationCollectionViewController
+        
+        locationCollectionViewCtrl.modalPresentationStyle = .fullScreen
+        self.present(locationCollectionViewCtrl, animated: false, completion: nil)
     }
     
     @IBAction func openLocationForm(_ sender: Any) {
@@ -65,7 +82,8 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
 
         cell.locationName?.text = locations[indexPath.row].name
-        cell.locationDescription?.text = locations[indexPath.row].latitude
+        cell.locationDescription?.text = locations[indexPath.row].info
+        cell.locationVisitedDate?.text = locations[indexPath.row].date
         
         if let imgData = locations[indexPath.row].photo {
             cell.locationImage?.image = UIImage(data: imgData)
