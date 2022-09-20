@@ -12,29 +12,33 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    var locationListViewCtrl: LocationListViewController!
+    var locationCollectionViewCtrl: LocationCollectionViewController!
     var locationIndex: Int?
     var location = Location();
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        location = DatabaseHelper.shared.getLocationFromCoreData(index: locationIndex!)
+        loadLocationData();
         mapView.delegate = self
         mapView.mapType = .hybrid
 
         addLocationPin()
     }
     
+    func loadLocationData(){
+        location = DatabaseHelper.shared.getLocationFromCoreData(index: locationIndex!)
+    }
+    
     @IBAction func Cancel(_ sender: UIButton) {
-        locationListViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationListViewontroller") as? LocationListViewController
+        locationCollectionViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationCollectionViewController") as? LocationCollectionViewController
         
-        locationListViewCtrl.modalPresentationStyle = .fullScreen
-        self.present(locationListViewCtrl, animated: true, completion: nil)
+        locationCollectionViewCtrl.modalPresentationStyle = .fullScreen
+        self.present(locationCollectionViewCtrl, animated: true, completion: nil)
     }
     
     func addLocationPin() {
-        var annotation = MKPointAnnotation()
+        let annotation = MKPointAnnotation()
         let lat = CLLocationDegrees(Double(location.latitude!)!)
         let long = CLLocationDegrees(Double(location.longitude!)!)
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -55,10 +59,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        var p = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKPinAnnotationView
+        var p = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKMarkerAnnotationView
 
         if p == nil {
-            p = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            p = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             p!.canShowCallout = true
             p!.calloutOffset = CGPoint(x: -5, y: 5)
             p!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)

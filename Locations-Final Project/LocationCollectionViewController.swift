@@ -18,8 +18,7 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        loadLocationData()
-        
+        loadLocationsData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,7 +26,7 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
         // Dispose of any resources that can be recreated.
     }
 
-    func loadLocationData(){
+    func loadLocationsData(){
         locations = DatabaseHelper.shared.getLocationsFromCoreData()
     }
     

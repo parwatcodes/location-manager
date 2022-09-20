@@ -17,8 +17,6 @@
 		6667EB5D28D9407B0050C29E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6667EB5C28D9407B0050C29E /* Assets.xcassets */; };
 		6667EB6028D9407B0050C29E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6667EB5E28D9407B0050C29E /* LaunchScreen.storyboard */; };
 		6667EB6828D941270050C29E /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6667EB6728D941270050C29E /* DatabaseHelper.swift */; };
-		6667EB6A28D942F50050C29E /* LocationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6667EB6928D942F50050C29E /* LocationListViewController.swift */; };
-		6667EB6C28D947360050C29E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6667EB6B28D947360050C29E /* TableViewCell.swift */; };
 		6667EB6E28D948720050C29E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6667EB6D28D948720050C29E /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +33,6 @@
 		6667EB5F28D9407B0050C29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6667EB6128D9407B0050C29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6667EB6728D941270050C29E /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
-		6667EB6928D942F50050C29E /* LocationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewController.swift; sourceTree = "<group>"; };
-		6667EB6B28D947360050C29E /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		6667EB6D28D948720050C29E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,12 +70,10 @@
 				6667EB6D28D948720050C29E /* MapViewController.swift */,
 				6667EB5228D940790050C29E /* SceneDelegate.swift */,
 				6667EB5428D940790050C29E /* LocationFormViewController.swift */,
-				6667EB6928D942F50050C29E /* LocationListViewController.swift */,
 				6667EB5628D940790050C29E /* Main.storyboard */,
 				6647283928D9685A00CBFD27 /* CollectionViewCell.swift */,
 				6647283B28D9687D00CBFD27 /* LocationCollectionViewController.swift */,
 				6667EB6728D941270050C29E /* DatabaseHelper.swift */,
-				6667EB6B28D947360050C29E /* TableViewCell.swift */,
 				6667EB5C28D9407B0050C29E /* Assets.xcassets */,
 				6667EB5E28D9407B0050C29E /* LaunchScreen.storyboard */,
 				6667EB6128D9407B0050C29E /* Info.plist */,
@@ -165,8 +159,6 @@
 				6647283C28D9687D00CBFD27 /* LocationCollectionViewController.swift in Sources */,
 				6667EB5128D940790050C29E /* AppDelegate.swift in Sources */,
 				6667EB5328D940790050C29E /* SceneDelegate.swift in Sources */,
-				6667EB6A28D942F50050C29E /* LocationListViewController.swift in Sources */,
-				6667EB6C28D947360050C29E /* TableViewCell.swift in Sources */,
 				6667EB5B28D940790050C29E /* Locations_Final_Project.xcdatamodeld in Sources */,
 				6667EB6E28D948720050C29E /* MapViewController.swift in Sources */,
 			);

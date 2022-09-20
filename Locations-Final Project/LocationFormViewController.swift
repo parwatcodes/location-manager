@@ -8,7 +8,7 @@
 import UIKit
 
 class LocationFormViewController: UIViewController {
-    @IBOutlet weak var imgViewSave: UIImageView!
+    @IBOutlet weak var imgView: UIImageView!
 
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var latitude: UITextField!
@@ -16,21 +16,12 @@ class LocationFormViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var date: UITextField!
     
-    @IBOutlet weak var lati: UILabel!
-    @IBOutlet weak var long: UILabel!
-    
     let imagePicker = UIImagePickerController()
     let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectImage))
-//        tapGesture.numberOfTouchesRequired = 1
-//        imgViewSave.isUserInteractionEnabled = true
-//        imgViewSave.layer.borderWidth = 0.5
-//        imgViewSave.layer.borderColor = UIColor.black.cgColor
-        
         dateFormatter.dateFormat = "MM/dd/yyyy"
         date?.text = dateFormatter.string(from: datePicker.date)
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
@@ -46,26 +37,20 @@ class LocationFormViewController: UIViewController {
         }
     }
     
-//    @objc func selectImage()
-//    {
-//        openImagePicker()
-//    }
-    
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
     @IBAction func btnSaveClicked(_ sender: UIButton) {
-        //let jpeg = imgViewSave.image?.jpegData(compressionQuality: 0.75)
+        //let jpeg = imgView.image?.jpegData(compressionQuality: 0.75)
         
-        if let png = imgViewSave.image?.pngData(){
+        if let png = imgView.image?.pngData(){
             let n = name.text!
             let lat = latitude.text!
             let long = longitude.text!
             
             DatabaseHelper.shared.saveImageToCoreData(imgData: png, n, lat, long)
         }
-        
     }
     
     @IBAction func selectPhotos(_ sender: Any) {
@@ -80,7 +65,7 @@ extension LocationFormViewController:UIImagePickerControllerDelegate,UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         dismiss(animated: true, completion: nil)
         if let img = info[.originalImage] as? UIImage{
-            imgViewSave.image = img
+            imgView.image = img
         }
     }
 }
