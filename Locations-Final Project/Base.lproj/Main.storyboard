@@ -159,10 +159,14 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfc-VP-eq7">
-                                <rect key="frame" x="298" y="72" width="77" height="35"/>
+                                <rect key="frame" x="329" y="62" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Cancel"/>
+                                <buttonConfiguration key="configuration" style="gray" title="X" cornerStyle="capsule">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
+                                    <color key="baseForegroundColor" red="1" green="0.72473902280000002" blue="0.22315771400000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="baseBackgroundColor" systemColor="labelColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="Cancel:" destination="HQw-iq-hIZ" eventType="touchUpInside" id="69G-20-7vh"/>
                                 </connections>
