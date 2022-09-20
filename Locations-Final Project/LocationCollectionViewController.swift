@@ -71,8 +71,6 @@ class LocationCollectionViewController: UIViewController, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
-        print("You selected cell #\(indexPath.item)!")
-        
         navigateToMapView(indexPath.item)
     }
     

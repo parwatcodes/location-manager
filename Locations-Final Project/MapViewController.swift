@@ -21,14 +21,52 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         location = DatabaseHelper.shared.getLocationFromCoreData(index: locationIndex!)
         mapView.delegate = self
-    }
+        mapView.mapType = .hybrid
 
-    
+        addLocationPin()
+    }
     
     @IBAction func Cancel(_ sender: UIButton) {
         locationListViewCtrl = storyboard?.instantiateViewController(withIdentifier: "LocationListViewontroller") as? LocationListViewController
         
         locationListViewCtrl.modalPresentationStyle = .fullScreen
         self.present(locationListViewCtrl, animated: true, completion: nil)
+    }
+    
+    func addLocationPin() {
+        var annotation = MKPointAnnotation()
+        let lat = CLLocationDegrees(Double(location.latitude!)!)
+        let long = CLLocationDegrees(Double(location.longitude!)!)
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        
+        let name = location.name
+        let info = location.info
+        let date = location.date
+        
+        annotation.coordinate = coordinate
+        annotation.title = "\(name ?? "")"
+        annotation.subtitle = info
+        
+        self.mapView.addAnnotation(annotation);
+
+        let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long),
+                                                  latitudinalMeters: 40000, longitudinalMeters: 40000)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var p = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKPinAnnotationView
+
+        if p == nil {
+            p = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            p!.canShowCallout = true
+            p!.calloutOffset = CGPoint(x: -5, y: 5)
+            p!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            p!.annotation = annotation
+        }
+        
+        return p
     }
 }
